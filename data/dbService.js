@@ -5,7 +5,17 @@ async function createCompany(company) {
     result = await db.insert("company", Object.keys(company), Object.values(company))
     return result
   } catch (err) {
-    console.error(`Error while getting products `, err.message);
+    console.error(`Error while creating company `, err.message);
+    return {status:"failure"};
+  }
+}
+
+async function createEmployee(employee) {
+  try {
+    result = await db.insert("employee", Object.keys(employee), Object.values(employee))
+    return result
+  } catch (err) {
+    console.error(`Error while creating employee `, err.message);
     return {status:"failure"};
   }
 }
@@ -35,6 +45,7 @@ async function getCompanies() {
 
 module.exports = {
   createCompany, 
+  createEmployee,
   getEmployees,
   getCompanies
 }

@@ -124,7 +124,7 @@ mutation {
 
 mutation {
 
-  addEmployee (id: 9, firstName:"James", lastName:"Yong", password:"Toronto", companyId: 1005) {
+  addEmployee (id: 9, firstName:"James", lastName:"Yong", companyId: 1005) {
     id,
 
     firstName,

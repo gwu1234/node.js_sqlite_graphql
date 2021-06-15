@@ -114,16 +114,20 @@ const Mutation = new GraphQLObjectType({
                 password: { type: GraphQLString },  
                 companyId: { type: GraphQLID }
             },
-            resolve(parent, args){
+            async resolve(parent, args){
                 let employee = {
                     id: args.id,
                     firstName: args.firstName,
                     lastName: args.lastName,
-                    password: args.password,
                     companyId: args.companyId
                 };
-                //let id = db.employees.create(employee);
-                return employee;
+                let result = await dbService.createEmployee(employee);
+                console.log (result) 
+                if (result.status ==="success") {
+                   return employee;
+                } else {
+                    return {}
+                }
             }
         }
     }
