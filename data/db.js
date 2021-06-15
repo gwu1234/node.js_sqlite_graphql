@@ -44,11 +44,11 @@ exports.insert_row = async (table_name, [...cols], [...vals] ) => {
 
 
 exports.query =  async (table_name="") => {
-  console.log("at query_rows")
+  //console.log("at query_rows")
   return new Promise((resolve, reject) => {
     if (!database) reject (new Error('null database'))
     let sql = `SELECT * from ${table_name}`
-    console.log(`sql = ${sql}`)
+    //console.log(`sql = ${sql}`)
     database.all(sql, [], (err, rows) => {
       if (err) {
         console.log (err.message)

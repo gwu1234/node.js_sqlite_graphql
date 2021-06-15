@@ -74,23 +74,17 @@ const RootQuery = new GraphQLObjectType({
             type: EmployeeType,
             args: { id: { type: GraphQLID } },
             async resolve(parent, args) {
-                let all = await dbService.getEmployees()
-                let found = all.find((employee => parseInt (employee.id) === parseInt (args.id)))
+                let employees = await dbService.getEmployees()
+                let found = employees.find((employee => parseInt (employee.id) === parseInt (args.id)))
                 return found
             }
          },
          employeesAtCompany: {
             type: new GraphQLList(EmployeeType),
-            args: { companyId: { type: GraphQLString } },
-            resolve(parent, args) {
-                //console.log(args.companyId)
-                //let found = employees.filter((employee=> employee.companyId === args.companyId))
-                let found = [{
-                    id: 1,
-                    firstName: "John", 
-                    lastName:  "Smith", 
-                    companyId: 1001,
-                }] 
+            args: { companyId: { type: GraphQLID } },
+            async resolve(parent, args) {
+                let employees = await dbService.getEmployees()
+                let found = employees.filter((employee=> parseInt(employee.companyId) === parseInt(args.companyId)))
                 return found
             }
          }

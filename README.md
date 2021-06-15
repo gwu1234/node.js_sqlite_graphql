@@ -73,7 +73,7 @@ let found = all.find((employee => parseInt (employee.id) === parseInt (args.id))
 
 ### find all employees from a company of a given company id:
 
-{employeesAtCoompany(companyId: "com-102") {
+{employeesAtCompany(companyId: 1001) {
 
      firstName,
 
@@ -85,13 +85,8 @@ let found = all.find((employee => parseInt (employee.id) === parseInt (args.id))
 
 mapped to resolver :
 
-employeesAtCoompany: (obj, args, context, info) => {
-      
-   return db.employees.list().filter((employee=> employee.companyId 
-   
-   === args.companyId))
-   
-}
+let employees = await dbService.getEmployees()
+let found = employees.filter((employee=> parseInt(employee.companyId) === parseInt(args.companyId)))
 
 ## mutation:
 
