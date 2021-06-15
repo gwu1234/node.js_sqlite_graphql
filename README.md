@@ -34,7 +34,7 @@ database = new sqlite3.Database("./data/data.db");
    company {
 
      name
-     
+
    }
 
 }}
@@ -106,7 +106,7 @@ let found = employees.filter((employee=> parseInt(employee.companyId) === parseI
 
 mutation {
 
-  addCompany (id: "com-106", name:"Costume", location:"Toronto", rating: 4.04) {
+  addCompany (id: 1005, name:"Costume", location:"Toronto", rating: 4.04) {
 
       id,
 
@@ -124,7 +124,7 @@ mutation {
 
 mutation {
 
-  addEmployee (id: "e1009", firstName:"James", lastName:"Yong", password:"Toronto", companyId: "com-105") {
+  addEmployee (id: 9, firstName:"James", lastName:"Yong", password:"Toronto", companyId: 1005) {
     id,
 
     firstName,

@@ -88,7 +88,7 @@ const Mutation = new GraphQLObjectType({
                 location: { type: GraphQLString },  
                 rating: { type: GraphQLFloat }
             },
-            resolve(parent, args){
+            async resolve(parent, args){
                 let company = {
                     id: args.id,
                     name: args.name,
@@ -96,9 +96,13 @@ const Mutation = new GraphQLObjectType({
                     rating: args.rating
                 };
                 //console.log (company)
-                //let id = db.companies.create(company);
-                //console.log (id) 
-                return company;
+                let result = await dbService.createCompany(company);
+                console.log (result) 
+                if (result.status ==="success") {
+                   return company;
+                } else {
+                    return {}
+                }
             }
         },
         addEmployee: {

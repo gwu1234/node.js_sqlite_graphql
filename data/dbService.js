@@ -1,13 +1,12 @@
 const db = require('./db');
 
-async function create(product) {
+async function createCompany(company) {
   try {
-    let timestamp = new Date().getTime();
-    result = await db.insert("product", [...Object.keys(product), "created_at"], [...Object.values(product), timestamp])
+    result = await db.insert("company", Object.keys(company), Object.values(company))
     return result
   } catch (err) {
     console.error(`Error while getting products `, err.message);
-    return {message:"posting failed"};
+    return {status:"failure"};
   }
 }
 
@@ -35,7 +34,7 @@ async function getCompanies() {
 }
 
 module.exports = {
-  create, 
+  createCompany, 
   getEmployees,
   getCompanies
 }

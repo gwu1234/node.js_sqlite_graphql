@@ -26,7 +26,7 @@ exports.create_table = (table_name,...Args) => {
   database.run("CREATE TABLE IF NOT EXISTS "+table_name+"("+Args+")");
 }
 
-exports.insert_row = async (table_name, [...cols], [...vals] ) => {
+exports.insert = async (table_name, [...cols], [...vals] ) => {
   //console.log("db: insert_row")
   if (!database) return
   return new Promise((resolve, reject) => {
@@ -35,9 +35,9 @@ exports.insert_row = async (table_name, [...cols], [...vals] ) => {
     database.run(sql, vals, (err) => {
       if (err) {
         console.error(`err: ${err.message}`);
-        reject(new Error("posting failed"))
+        reject({status:"failure"})
       }
-      resolve({message: "posting successfully"})
+      resolve({status: "success"})
     });
   })
 }
