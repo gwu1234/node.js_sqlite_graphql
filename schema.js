@@ -2,9 +2,6 @@ const graphql = require('graphql');
 const dbService = require('./data/dbService') 
 const { GraphQLObjectType, GraphQLString, GraphQLID,GraphQLSchema, GraphQLList, GraphQLFloat } = graphql;
 
-//var employees = db.employees.list()
-//var companies = db.companies.list() 
-
 const EmployeeType = new GraphQLObjectType({ 
     name: "Employee",
     fields: ()=>({
@@ -14,14 +11,9 @@ const EmployeeType = new GraphQLObjectType({
         companyId: {type: GraphQLID},
         company: {
             type: CompanyType,
-            resolve(parent, args){
-                //console.log(parent);
-                let found = {
-                    id: 1001, 
-                    name: "HLC", 
-                    location:  "Ottawa",
-                    rating: 4.1,
-                }
+            async resolve(parent, args){
+                let companies = await dbService.getCompanies()
+                let found = companies.find(company=>parseInt(company.id)===parseInt(parent.companyId))
                 return found;
             }
         } 
@@ -37,15 +29,9 @@ const CompanyType = new GraphQLObjectType({
         rating: {type: GraphQLFloat},
         employee: {
             type: GraphQLList(EmployeeType),
-            resolve(parent, args){
-                //console.log(parent);
-                //let found = employees.filter((employee => parent.id === employee.companyId))
-                let found = [{
-                    id: 1,
-                    firstName: "John", 
-                    lastName:  "Smith", 
-                    companyId: 1001,
-                }] 
+            async resolve(parent, args){
+                let employees = await dbService.getEmployees()
+                let found = employees.filter(employee=>parseInt(employee.companyId)===parseInt(parent.id))
                 return found;
             }
         } 
