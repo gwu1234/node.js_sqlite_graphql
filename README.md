@@ -35,7 +35,7 @@ database = new sqlite3.Database("./data/data.db");
 
 mapped to resolver:
 
-employees = dbService.getEmployees()
+employees = await dbService.getEmployees()
 
 ### find all companies:
 
@@ -49,11 +49,11 @@ employees = dbService.getEmployees()
 
 mapped to resolver:
 
-let companies = dbService.getCompanies()
+let companies = await dbService.getCompanies()
 
 ### find an employee of a given employee id:
 
-employeesById(id:"E1001") {  
+employeesById(id: 2) {  
 
      id, 
 
@@ -67,9 +67,8 @@ employeesById(id:"E1001") {
 
 mapped to resolver:
 
-employeesById: (obj, args, context, info) => 
-      
-  db.employees.list().filter((employee => employee.id === args.id))
+let all = await dbService.getEmployees()
+let found = all.find((employee => parseInt (employee.id) === parseInt (args.id)))
    
 
 ### find all employees from a company of a given company id:

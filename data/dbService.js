@@ -14,6 +14,7 @@ async function create(product) {
 async function getEmployees() {
   try {
     let result = await db.query("employee")
+    console.log("dbService")
     console.log(result)
     return result
   } catch (err) {
