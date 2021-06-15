@@ -31,6 +31,12 @@ database = new sqlite3.Database("./data/data.db");
 
    firstName,
 
+   company {
+
+     name
+     
+   }
+
 }}
 
 mapped to resolver:
@@ -43,7 +49,13 @@ employees = await dbService.getEmployees()
 
    id,
 
-   name
+   name,
+
+   employee {
+
+     firstName
+
+   }
 
 }}
 
