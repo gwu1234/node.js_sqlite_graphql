@@ -80,6 +80,7 @@ employeesById(id: 2) {
 mapped to resolver:
 
 let all = await dbService.getEmployees()
+
 let found = all.find((employee => parseInt (employee.id) === parseInt (args.id)))
    
 
@@ -98,6 +99,7 @@ let found = all.find((employee => parseInt (employee.id) === parseInt (args.id))
 mapped to resolver :
 
 let employees = await dbService.getEmployees()
+
 let found = employees.filter((employee=> parseInt(employee.companyId) === parseInt(args.companyId)))
 
 ## mutation:
@@ -125,6 +127,7 @@ mutation {
 mutation {
 
   addEmployee (id: 9, firstName:"James", lastName:"Yong", companyId: 1005) {
+
     id,
 
     firstName,
