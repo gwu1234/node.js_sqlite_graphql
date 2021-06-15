@@ -1,5 +1,5 @@
 const graphql = require('graphql');
-//const db = require('./db') 
+const dbService = require('./data/dbService') 
 const { GraphQLObjectType, GraphQLString, GraphQLID,GraphQLSchema, GraphQLList, GraphQLFloat } = graphql;
 
 //var employees = db.employees.list()
@@ -57,34 +57,19 @@ const CompanyType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
-        hello: {
-            type: GraphQLString,
-            resolve(parent, args){
-                return "welcome to GraphQl";
-            }
-        },
         companies: {
             type: new GraphQLList(CompanyType),
             resolve(parent, args){
-                let found = [{
-                    id: 1001, 
-                    name: "HLC", 
-                    location:  "Ottawa",
-                    rating: 4.1,
-                }] 
-                return found;
+                let companies = dbService.getCompanies()
+                return companies;
             }
         },
         employees: {
             type: new GraphQLList(EmployeeType),
             resolve(parent, args){
-                let found = [{
-                    id: 1,
-                    firstName: "John", 
-                    lastName:  "Smith", 
-                    companyId: 1001,
-                }] 
-                return found;
+                let employees = dbService.getEmployees()
+                //console.log (employees)
+                return employees;
             }
         },
         employeesById: {

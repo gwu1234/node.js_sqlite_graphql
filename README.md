@@ -35,7 +35,7 @@ database = new sqlite3.Database("./data/data.db");
 
 mapped to resolver:
 
-employees:() => db.employees.list()
+employees = dbService.getEmployees()
 
 ### find all companies:
 
@@ -49,7 +49,7 @@ employees:() => db.employees.list()
 
 mapped to resolver:
 
-companies:() => db.companies.list() 
+let companies = dbService.getCompanies()
 
 ### find an employee of a given employee id:
 

@@ -43,7 +43,7 @@ exports.insert_row = async (table_name, [...cols], [...vals] ) => {
 }
 
 
-exports.query_rows =  async (table_name="") => {
+exports.query =  async (table_name="") => {
   console.log("at query_rows")
   return new Promise((resolve, reject) => {
     if (!database) reject (new Error('null database'))

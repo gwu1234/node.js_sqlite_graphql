@@ -11,18 +11,30 @@ async function create(product) {
   }
 }
 
-async function getProducts() {
+async function getEmployees() {
   try {
-    let result = await db.query("product")
+    let result = await db.query("employee")
+    console.log(result)
     return result
   } catch (err) {
-    console.error(`Error while getting products `, err.message);
-    return {message:"Getting failed"};
+    console.error(`Error while getting employees `, err.message);
+    return [];
+  }
+}
+
+async function getCompanies() {
+  try {
+    let result = await db.query("company")
+    //console.log(result)
+    return result
+  } catch (err) {
+    console.error(`Error while getting companies `, err.message);
+    return [];
   }
 }
 
 module.exports = {
-  //getMultiple,
   create, 
-  getProducts
+  getEmployees,
+  getCompanies
 }
